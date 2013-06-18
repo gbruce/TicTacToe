@@ -30,12 +30,15 @@ tictactoe.Machine = function() {
 
 				for(i=0; i<this.model.tiles.length; i++) {
 					$('#tile-'+i).attr('index', i).on('click', function(){
-						that.model.updateTile($(this).attr('index'), that.currentPlayer);
-						if( that.currentPlayer == 'x'){
-							that.currentPlayer = 'o';
-						}
-						else {
-							that.currentPlayer = 'x';
+						var index = $(this).attr('index');
+						if(that.model.tiles[index] == '') {
+							that.model.updateTile(index, that.currentPlayer);
+							if( that.currentPlayer == 'x'){
+								that.currentPlayer = 'o';
+							}
+							else {
+								that.currentPlayer = 'x';
+							}
 						}
 					});
 				}
