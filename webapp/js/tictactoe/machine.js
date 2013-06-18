@@ -25,9 +25,12 @@ tictactoe.Machine = function() {
 				$('#start-button').off('click');
 			},
 			onenterplaying: function(event, from, to) {
+				this.OnStateChanged.fire();
+
 				var i, that = this;
 				this.currentPlayer = 'x';
 
+				/* this should go into the view */
 				for(i=0; i<this.model.tiles.length; i++) {
 					$('#tile-'+i).attr('index', i).on('click', function(){
 						var index = $(this).attr('index');
