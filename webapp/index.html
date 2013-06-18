@@ -3,14 +3,31 @@
 	<head>
 		<meta charset=utf-8>
 		<title>Tic Tac Toe</title>
+		<script>
+			var tictactoe = tictactoe || {};
+		</script>
 		<script src='js/vendor/jquery-2.0.2.min.js'></script>
 		<script src='js/vendor/state-machine.min.js'></script>
+		<script src='js/tictactoe/machine.js'></script>
+		<script src='js/tictactoe/model.js'></script>
+		<script src='js/tictactoe/view.js'></script>
 	</head>
 	<body>
 		<script>
+			var appStateMachine = null;
 			$(document).ready(function() {
-	 			alert("document is ready");
+				appStateMachine = StateMachine.create({
+					initial: 'init',
+					target: tictactoe.Machine.prototype,
+					events: [
+						{ name: 'start',  from: 'init', to: 'playing' },
+						{ name: 'gameover',  from: 'playing', to: 'end' },
+						{ name: 'start',  from: 'end', to: 'playing' }
+					]
+				});
 			});
 		</script>
+		<div id='game-content'/>
+		<button id='start-button'/>
 	</body>
 </html>
