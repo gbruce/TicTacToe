@@ -31,3 +31,24 @@ tictactoe.View = function(model) {
 	this.model.onTileChanged.add(updateTiles);
 };
 
+tictactoe.ButtonView = function(element, machine, model) {
+	var that = this;
+	this.machine = machine;
+	this.model = model;
+
+	var onMachineStateChanged = function() {
+		var current = that.machine.current;
+		if(current == 'init') {
+			$(element).text('Start');
+		}
+		else if(current == 'playing') {
+			$(element).text('Cancel');
+		}
+		else {
+			$(element).text('Start');
+		}
+	};
+
+	onMachineStateChanged();
+	machine.OnStateChanged.add(onMachineStateChanged);
+};

@@ -17,18 +17,11 @@
 		<script>
 			var appStateMachine = null;
 			$(document).ready(function() {
-				appStateMachine = StateMachine.create({
-					initial: 'init',
-					target: tictactoe.Machine.prototype,
-					events: [
-						{ name: 'start',  from: 'init', to: 'playing' },
-						{ name: 'gameover',  from: 'playing', to: 'end' },
-						{ name: 'start',  from: 'end', to: 'playing' }
-					]
-				});
+				appStateMachine = new tictactoe.Machine();
 			});
 		</script>
-		<div id='game-content'/>
+		<div id='game-content'>
+		</div>
 		<button id='start-button'/>
 	</body>
 </html>
