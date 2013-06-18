@@ -16,7 +16,7 @@ tictactoe.Machine = function() {
 				this.view = new tictactoe.View(this.model);
 				this.buttonView = new tictactoe.ButtonView($('#start-button'), this, this.model);
 
-				/* transition to playing */
+				/* transition to playing, this should go in the view */
 				$('#start-button').on('click', function(){
 					that.start();
 				});
@@ -25,7 +25,20 @@ tictactoe.Machine = function() {
 				$('#start-button').off('click');
 			},
 			onenterplaying: function(event, from, to) {
-				
+				var i, that = this;
+				this.currentPlayer = 'x';
+
+				for(i=0; i<this.model.tiles.length; i++) {
+					$('#tile-'+i).attr('index', i).on('click', function(){
+						that.model.updateTile($(this).attr('index'), that.currentPlayer);
+						if( that.currentPlayer == 'x'){
+							that.currentPlayer = 'o';
+						}
+						else {
+							that.currentPlayer = 'x';
+						}
+					});
+				}
 			}
 		}
 	});

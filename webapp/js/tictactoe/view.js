@@ -19,12 +19,8 @@ tictactoe.View = function(model) {
 	$('#game-content').append('</tbody>');
 	$('#game-content').append('</table>');
 
-	var updateTiles = function() {
-		/* update the tile text */
-		var count;
-		for(count=0; count<this.model.tiles.length; count++) {
-			$('tile-' + count).text(this.model.tiles[count]);
-		}
+	var updateTiles = function(index) {
+		$('#tile-' + index).text(that.model.tiles[index]);
 	};
 
 	/* connect table to model change events */
